@@ -1,0 +1,32 @@
+Sub total_stock():
+
+For Each ws In Worksheets
+
+    ws.Cells(1, 9).Value = "Ticker"
+    ws.Cells(1, 10).Value = "Total Stock Volume"
+    Dim ticker As String
+    Dim tickertotal As Double
+    tickertotal = 0
+    Dim sumtable As Integer
+    sumtable = 2
+
+    lastrow = ws.Cells(Rows.Count, 1).End(xlUp).Row
+    
+    For i = 2 To lastrow
+        If ws.Cells(i + 1, 1).Value <> ws.Cells(i, 1).Value Then
+            ticker = ws.Cells(i, 1).Value
+            tickertotal = tickertotal + ws.Cells(i, 7).Value
+            ws.Cells(sumtable, 9).Value = ticker
+            ws.Cells(sumtable, 10).Value = tickertotal
+            sumtable = sumtable + 1
+            tickertotal = 0
+        Else
+            tickertotal = tickertotal + ws.Cells(i, 7).Value
+        End If
+        
+    Next i
+    
+Next ws
+
+
+End Sub
